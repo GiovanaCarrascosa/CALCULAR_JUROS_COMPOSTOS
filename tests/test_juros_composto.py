@@ -98,44 +98,6 @@ def test_verificar_se_o_valor_do_tempo_for_uma_string_ao_inves_de_int_ou_float()
 
 ####################################################################################################################
 
-# caso o valor da capital seja = 0
-def test_verificar_se_o_valor_da_capital_for_igual_a_zero():
-
-    #definindo a entrada
-    capital = 0
-    taxa_juros = 2
-    tempo = 2
-
-    #executando a funcao e esperando erro
-    with pytest.raises(ValueError, match = "O capital investido não pode ser =  0"):
-        calcular_juros_compostos(capital, taxa_juros, tempo)
-
-# caso o valor da taxa de juros seja = 0
-def test_verificar_se_o_valor_da_taxa_juros_for_igual_a_zero():
-
-    #definindo a entrada
-    capital = 1000
-    taxa_juros = 0
-    tempo = 2
-
-    #executando a funcao e esperando erro
-    with pytest.raises(ValueError, match = "A taxa de juros não pode ser =  0"):
-        calcular_juros_compostos(capital, taxa_juros, tempo)
-
-# caso o valor do tempo seja = 0
-def test_verificar_se_o_valor_do_tempo_for_igual_a_zero():
-
-    #definindo a entrada
-    capital = 2000
-    taxa_juros = 2
-    tempo = 0
-
-    #executando a funcao e esperando erro
-    with pytest.raises(ValueError, match = "O tempo não pode ser =  0"):
-        calcular_juros_compostos(capital, taxa_juros, tempo)
-
-####################################################################################################################
-
 # caso o valor da capital nao tenha sido informado
 def test_verificar_se_o_valor_da_capital__nao_foi_preenchida():
 
@@ -144,8 +106,8 @@ def test_verificar_se_o_valor_da_capital__nao_foi_preenchida():
     tempo = 2
 
     #executando a funcao e esperando erro
-    with pytest.raises(ValueError, match = "O capital investido não pode ser =  0"):
-        calcular_juros_compostos(taxa_juros, tempo)
+    with pytest.raises(ValueError, match = "Não é possível fazer a conta sem o valor da capital"):
+        calcular_juros_compostos(None, taxa_juros, tempo)
 
 # caso o valor da taxa nao tenha sido informado
 def test_verificar_se_o_valor_da_taxa_juros_nao_foi_preenchida():
@@ -155,8 +117,8 @@ def test_verificar_se_o_valor_da_taxa_juros_nao_foi_preenchida():
     tempo = 2
 
     #executando a funcao e esperando erro
-    with pytest.raises(ValueError, match = "O capital investido não pode ser =  0"):
-        calcular_juros_compostos(capital, tempo)
+    with pytest.raises(ValueError, match = "Não é possível fazer a conta sem o valor da taxa de juros"):
+        calcular_juros_compostos(capital, None, tempo)
 
 # caso o valor do tempo nao tenha sido informado
 def test_verificar_se_o_valor_do_tempo_nao_foi_preenchido():
@@ -166,9 +128,8 @@ def test_verificar_se_o_valor_do_tempo_nao_foi_preenchido():
     taxa_juros = 2
 
     #executando a funcao e esperando erro
-    with pytest.raises(ValueError, match = "O capital investido não pode ser =  0"):
-        calcular_juros_compostos(capital, taxa_juros)
-
+    with pytest.raises(ValueError, match = "Não é possível fazer a conta sem o valor do tempo"):
+        calcular_juros_compostos(capital, taxa_juros, None)
   
 ####################################################################################################################      
 # caso NENHUM valor tenha sido informado
@@ -178,4 +139,4 @@ def test_verificar_se_a_tupla_estiver_vazia():
     
     #executando a funcao e esperando erro
     with pytest.raises(ValueError, match = "Não é permitido uma tupla vazia."):
-        calcular_juros_compostos()
+        calcular_juros_compostos(None, None, None)
